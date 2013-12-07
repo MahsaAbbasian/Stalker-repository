@@ -25,13 +25,12 @@ DROP TABLE IF EXISTS `Car`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Car` (
-  `idCar` int(11) NOT NULL AUTO_INCREMENT,
-  `Brand` varchar(10) DEFAULT NULL,
+  `Brand` varchar(32) DEFAULT NULL,
   `RegistryNumber` varchar(10) NOT NULL,
   `Type` varchar(10) DEFAULT NULL,
   `Consumption` double DEFAULT NULL,
-  `Username` varchar(47) DEFAULT NULL,
-  PRIMARY KEY (`idCar`,`RegistryNumber`)
+  `Username` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`RegistryNumber`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -41,7 +40,7 @@ CREATE TABLE `Car` (
 
 LOCK TABLES `Car` WRITE;
 /*!40000 ALTER TABLE `Car` DISABLE KEYS */;
-INSERT INTO `Car` VALUES (1,'Volvo','KRB034','95',0.7,'janip'),(2,'VW','UNE371','95',0.7,'janip');
+INSERT INTO `Car` VALUES ('Volvo','ABC123','95',0.7,'jani.pasanen@student.gu.se'),('VW','ABC321','95',0.6,'jani.pasanen@student.gu.se');
 /*!40000 ALTER TABLE `Car` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -53,9 +52,8 @@ DROP TABLE IF EXISTS `ExtraCostTypes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ExtraCostTypes` (
-  `idExtraCostTypes` int(11) NOT NULL AUTO_INCREMENT,
   `ExtraCostTypes` varchar(45) NOT NULL,
-  PRIMARY KEY (`idExtraCostTypes`)
+  PRIMARY KEY (`ExtraCostTypes`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -65,7 +63,7 @@ CREATE TABLE `ExtraCostTypes` (
 
 LOCK TABLES `ExtraCostTypes` WRITE;
 /*!40000 ALTER TABLE `ExtraCostTypes` DISABLE KEYS */;
-INSERT INTO `ExtraCostTypes` VALUES (1,'Food'),(2,'Parking');
+INSERT INTO `ExtraCostTypes` VALUES ('Food'),('Parking');
 /*!40000 ALTER TABLE `ExtraCostTypes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,10 +102,9 @@ DROP TABLE IF EXISTS `Locations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Locations` (
-  `idLocations` int(11) NOT NULL AUTO_INCREMENT,
-  `City` varchar(20) NOT NULL,
-  `Street` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`idLocations`)
+  `City` varchar(30) NOT NULL,
+  `Street` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`City`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -117,7 +114,7 @@ CREATE TABLE `Locations` (
 
 LOCK TABLES `Locations` WRITE;
 /*!40000 ALTER TABLE `Locations` DISABLE KEYS */;
-INSERT INTO `Locations` VALUES (1,'Göteborg',''),(2,'Stockholm',''),(3,'Malmö',''),(4,'Örnsköldsvik',''),(5,'Paris',''),(6,'Brussels',''),(7,'London',''),(8,'Hallstahammar',''),(9,'Helsingborg',NULL);
+INSERT INTO `Locations` VALUES ('Göteborg',NULL),('Stockholm',NULL),('Malmö',NULL),('Örnsköldsvik',NULL),('Paris',NULL),('Brussels',NULL),('London',NULL),('Hallstahammar',NULL),('Helsingborg',NULL);
 /*!40000 ALTER TABLE `Locations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,9 +126,8 @@ DROP TABLE IF EXISTS `ReasonForTravel`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ReasonForTravel` (
-  `idReason` int(11) NOT NULL AUTO_INCREMENT,
   `TypeOfReason` varchar(45) NOT NULL,
-  PRIMARY KEY (`idReason`)
+  PRIMARY KEY (`TypeOfReason`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -141,7 +137,7 @@ CREATE TABLE `ReasonForTravel` (
 
 LOCK TABLES `ReasonForTravel` WRITE;
 /*!40000 ALTER TABLE `ReasonForTravel` DISABLE KEYS */;
-INSERT INTO `ReasonForTravel` VALUES (1,'Customer visit'),(2,'Excebition'),(3,'Project meeting'),(4,'Sales meeting'),(5,'Conference'),(6,'Board meeting'),(7,'');
+INSERT INTO `ReasonForTravel` VALUES (1,'Customer visit'),(2,'Excebition'),(3,'Project meeting'),(4,'Sales meeting'),(5,'Conference'),(6,'Board meeting');
 /*!40000 ALTER TABLE `ReasonForTravel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,7 +155,7 @@ CREATE TABLE `TripData` (
   `From` varchar(20) NOT NULL,
   `To` varchar(20) NOT NULL,
   `ReasonOfTrip` varchar(45) NOT NULL,
-  `Username` varchar(8) NOT NULL,
+  `Username` varchar(30) NOT NULL,
   `Name` varchar(47) DEFAULT NULL,
   `RegistryNumber` varchar(10) DEFAULT NULL,
   `Timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -174,7 +170,7 @@ CREATE TABLE `TripData` (
 
 LOCK TABLES `TripData` WRITE;
 /*!40000 ALTER TABLE `TripData` DISABLE KEYS */;
-INSERT INTO `TripData` VALUES (1,100000,101000,'Göteborg','Stockholm','Conference','janip','Jani Pasanen','KRB034','2013-10-31 14:34:00','2012-03-12');
+INSERT INTO `TripData` VALUES (1,100000,101000,'Göteborg','Stockholm','Conference','jani.pasanen@student.gu.se','Jani Pasanen','KRT123','2013-10-31 14:34:00','2012-03-12');
 /*!40000 ALTER TABLE `TripData` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,13 +182,12 @@ DROP TABLE IF EXISTS `User`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `User` (
-  `idUser` int(11) NOT NULL AUTO_INCREMENT,
-  `Username` varchar(8) NOT NULL,
+  `Username` varchar(30) NOT NULL,
   `FirstName` varchar(20) NOT NULL,
   `LastName` varchar(25) NOT NULL,
   `Password` varchar(15) DEFAULT NULL,
   `Name` varchar(47) DEFAULT NULL,
-  PRIMARY KEY (`idUser`,`Username`)
+  PRIMARY KEY (`Username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -202,7 +197,7 @@ CREATE TABLE `User` (
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES (1,'janip','Jani','Pasanen','1234pasanen','Jani Pasanen');
+INSERT INTO `User` VALUES ('jani.pasanen@student.gu.se','Jani','Pasanen','1234pasanen','Jani Pasanen');
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

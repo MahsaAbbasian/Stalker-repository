@@ -27,7 +27,7 @@ public class DatabaseConnections {
 		Statement statement = connection.createStatement();
 
 		// Execute a statement
-		ResultSet resultSet = statement.executeQuery("SELECT City FROM StalkerDB.Locations;");
+		ResultSet resultSet = statement.executeQuery("SELECT City FROM Locations;");
 
 		// Iterate through the result and print the student names
 		while (resultSet.next())
